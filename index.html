@@ -76,10 +76,30 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Built by Danzz. All rights reserved.</p>
+        <p>&copy; 2024 Built by Danzz. All rights reserved.</p>
     </footer>
+
+    <div id="music-control" class="music-hidden">
+        <audio id="background-music" loop>
+            <source src="https://files.catbox.moe/b28wbp.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div class="music-info">
+            <span class="music-title">Avangard</span>
+            <div id="music-bar-container">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+                <span class="bar bar-4"></span>
+            </div>
+        </div>
+
+        <button id="toggle-music">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
