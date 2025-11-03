@@ -49,6 +49,36 @@ document.addEventListener("DOMContentLoaded", function() {
     }, totalLoadingTime + 1000); 
 
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); 
+
+            const scrollTargetId = this.getAttribute('data-target') || this.getAttribute('href');
+            
+            let urlHash = this.getAttribute('href');
+            if (urlHash === '#about' || urlHash === '#skills') {
+                 
+            } else {
+                urlHash = '#menu';
+            }
+
+            const targetElement = document.querySelector(scrollTargetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                if (history.pushState) {
+                    history.pushState(null, null, urlHash);
+                } else {
+                    window.location.hash = urlHash;
+                }
+            }
+        });
+    });
+    
     const hiddenElements = document.querySelectorAll('.hidden');
 
     const observer = new IntersectionObserver((entries) => {
