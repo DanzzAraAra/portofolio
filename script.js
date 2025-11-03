@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const progressBar = document.querySelector('.progress-bar');
     const loadingText = document.querySelector('.loading-text');
     const heroElements = document.querySelectorAll('.initial-hidden'); 
+    const musicControl = document.getElementById('music-control');
 
     let currentProgress = 0;
     const totalLoadingTime = 5000; 
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             setTimeout(() => {
                 preloader.style.display = 'none';
+                musicControl.classList.add('music-visible');
             }, 700); 
 
         }, 500); 
@@ -93,5 +95,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     hiddenElements.forEach((el) => observer.observe(el));
+
+    const music = document.getElementById('background-music');
+    const toggleButton = document.getElementById('toggle-music');
+    const musicBarContainer = document.getElementById('music-bar-container');
+
+    toggleButton.addEventListener('click', function() {
+        if (music.paused) {
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    toggleButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    musicBarContainer.classList.add('bar-animated');
+                }).catch(error => {
+                    toggleButton.innerHTML = '<i class="fas fa-play"></i>';
+                    musicBarContainer.classList.remove('bar-animated');
+                });
+            }
+        } else {
+            music.pause();
+            toggleButton.innerHTML = '<i class="fas fa-play"></i>';
+            musicBarContainer.classList.remove('bar-animated');
+        }
+    });
 
 });
